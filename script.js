@@ -1,42 +1,42 @@
-let colName;
+const appElement = document.querySelector('.app');
 
-function fromLowToHigh(a, b) {
-    if ( a.order < b.order ){
-        return -1;
-      }
-      if ( a.order > b.order ){
-        return 1;
-      }
-      return 0;
-    }
+let htmlString = '';
 
-GET_COLUMNS_RESPONSE.sort(fromLowToHigh);
+for (let index = 0; index < GET_COLUMNS_RESPONSE.length; index++) {
 
-for (let i = 0; i < GET_COLUMNS_RESPONSE.length; i++) {
+    const colmnId = GET_COLUMNS_RESPONSE[index].id;
+    const currentColumnCards = getCardsByColumnId(colmnId);
+    let allCardsForColumnHtml = '';
 
-    colName = GET_COLUMNS_RESPONSE[i].name;
+    currentColumnCards.forEach(function (x) {
+        allCardsForColumnHtml += getCard(x.title, x.description, x.userId);
+    });
 
-    let newCol = document.createElement('div');
-    newCol.innerText = colName;
-    newCol.classList.add('col');
-    document.querySelector('.app').appendChild(newCol);
 
+    htmlString += `<div class="col">
+                        <div class="col__header">${GET_COLUMNS_RESPONSE[index].name}</div>
+                        <div class="col_content">${allCardsForColumnHtml}</div>
+                    </div>`;
 }
 
-let cardInfoString;
+appElement.innerHTML = htmlString;
+
+function getCardsByColumnId(id) {
+    return GET_CARDS_RESPONSE.filter(function (card) {
+        return card.columnId === id;
+    })
+}
 
 function getCard(title, description, userName) {
-    
     return `<div class="card">
                 <div class="card__inform">
                     <div class="card__title">${title}</div>
                     <div class="card__description">${description}</div>
                 </div>
                 <div class="card__user">
-                  
                     <div class="card__user-name">${userName}</div>
                 </div>
             </div>`;
-
 }
+
 
