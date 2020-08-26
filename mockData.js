@@ -42,7 +42,7 @@ const GET_COLUMNS_RESPONSE = [
     {
         id: 17,
         name: 'dev',
-        order: 2
+        order: 6
     },
     {
         id: 23,
