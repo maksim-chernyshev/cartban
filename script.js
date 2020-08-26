@@ -9,7 +9,10 @@ for (let index = 0; index < GET_COLUMNS_RESPONSE.length; index++) {
     let allCardsForColumnHtml = '';
 
     currentColumnCards.forEach(function (x) {
-        allCardsForColumnHtml += getCard(x.title, x.description, x.userId);
+        let userName = GET_USERS_RESPONSE.find(function(user) {
+            return user.id == x.userId;
+    });
+        allCardsForColumnHtml += getCard(x.title, x.description, userName.name);
     });
 
 
