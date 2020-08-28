@@ -1,3 +1,28 @@
+.app {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card__user {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card__user-photo {
+    height: 35px;
+    width: 35px;
+
+    border-radius: 50%;
+}
+
+.card__user-name {
+    margin-left: 15px;
+    display:flex;
+    align-items: center;
+
+}
+
 .col {
     border: 1px solid black;
 }

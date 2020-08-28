@@ -8,11 +8,12 @@ for (let index = 0; index < GET_COLUMNS_RESPONSE.length; index++) {
     const currentColumnCards = getCardsByColumnId(colmnId);
     let allCardsForColumnHtml = '';
 
-    currentColumnCards.forEach(function (x) {
-        let userName = GET_USERS_RESPONSE.find(function(user) {
-            return user.id == x.userId;
-    });
-        allCardsForColumnHtml += getCard(x.title, x.description, userName.name);
+    currentColumnCards.forEach(function (card) {
+        let user = GET_USERS_RESPONSE.find(function (user) {
+            return user.id == card.userId; 
+        });
+        
+        allCardsForColumnHtml += getCard(card.title, card.description, user.name, user.photoUrl);
     });
 
 
@@ -20,6 +21,7 @@ for (let index = 0; index < GET_COLUMNS_RESPONSE.length; index++) {
                         <div class="col__header">${GET_COLUMNS_RESPONSE[index].name}</div>
                         <div class="col_content">${allCardsForColumnHtml}</div>
                     </div>`;
+
 }
 
 appElement.innerHTML = htmlString;
@@ -30,16 +32,21 @@ function getCardsByColumnId(id) {
     })
 }
 
-function getCard(title, description, userName) {
+function getCard(title, description, userName, photo) {
     return `<div class="card">
                 <div class="card__inform">
                     <div class="card__title">${title}</div>
                     <div class="card__description">${description}</div>
                 </div>
                 <div class="card__user">
+                    <div class="card__user-picture">
+                        <img class="card__user-photo"src="${photo}">
+                    </div>
                     <div class="card__user-name">${userName}</div>
                 </div>
             </div>`;
 }
+
+
 
 
