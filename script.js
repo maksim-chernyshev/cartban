@@ -10,9 +10,9 @@ for (let index = 0; index < GET_COLUMNS_RESPONSE.length; index++) {
 
     currentColumnCards.forEach(function (card) {
         let user = GET_USERS_RESPONSE.find(function (user) {
-            return user.id == card.userId; 
+            return user.id == card.userId;
         });
-        
+
         allCardsForColumnHtml += getCard(card.title, card.description, user.name, user.photoUrl);
     });
 
@@ -33,6 +33,21 @@ function getCardsByColumnId(id) {
 }
 
 function getCard(title, description, userName, photo) {
+
+    let selectUsersHtml = `<select class="card__user-list">`;
+    GET_USERS_RESPONSE.forEach(user => {
+        selectUsersHtml += `<option>${user.name}</option>`;
+    });
+
+    
+    // selectUsersHtml += GET_USERS_RESPONSE.map(human => {
+    //     return `<option>${human.name}</option>`;
+    // }).join('');
+
+    selectUsersHtml += `</select>`;
+
+
+
     return `<div class="card">
                 <div class="card__inform">
                     <div class="card__title">${title}</div>
@@ -42,7 +57,7 @@ function getCard(title, description, userName, photo) {
                     <div class="card__user-picture">
                         <img class="card__user-photo"src="${photo}">
                     </div>
-                    <div class="card__user-name">${userName}</div>
+                        <div class="card__user-name">${selectUsersHtml}</div>
                 </div>
             </div>`;
 }
