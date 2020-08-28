@@ -13,7 +13,7 @@ for (let index = 0; index < GET_COLUMNS_RESPONSE.length; index++) {
             return user.id == card.userId;
         });
 
-        allCardsForColumnHtml += getCard(card.title, card.description, user.name, user.photoUrl);
+        allCardsForColumnHtml += getCard(card.id, card.title, card.description, user.name, user.photoUrl);
     });
 
 
@@ -32,7 +32,7 @@ function getCardsByColumnId(id) {
     })
 }
 
-function getCard(title, description, userName, photo) {
+function getCard(id, title, description, userName, photo) {
 
     let selectUsersHtml = `<select class="card__user-list">`;
     GET_USERS_RESPONSE.forEach(user => {
@@ -53,7 +53,7 @@ function getCard(title, description, userName, photo) {
 
 
 
-    return `<div class="card">
+    return `<div class="card" data-cardId="${id}">
                 <div class="card__inform">
                     <div class="card__title">${title}</div>
                     <div class="card__description">${description}</div>
