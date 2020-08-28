@@ -36,7 +36,12 @@ function getCard(title, description, userName, photo) {
 
     let selectUsersHtml = `<select class="card__user-list">`;
     GET_USERS_RESPONSE.forEach(user => {
+        if (userName === user.name) {
+            selectUsersHtml += `<option selected>${user.name}</option>`;
+        } else {
         selectUsersHtml += `<option>${user.name}</option>`;
+    }
+
     });
 
     
