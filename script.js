@@ -34,12 +34,12 @@ function getCardsByColumnId(id) {
 
 function getCard(id, title, description, userName, photo) {
 
-    let selectUsersHtml = `<select class="card__user-list">`;
+    let selectUsersHtml = `<select class="card__user-select">`;
     GET_USERS_RESPONSE.forEach(user => {
         if (userName === user.name) {
-            selectUsersHtml += `<option selected>${user.name}</option>`;
+            selectUsersHtml += `<option value="${user.id}"selected>${user.name}</option>`;
         } else {
-        selectUsersHtml += `<option>${user.name}</option>`;
+        selectUsersHtml += `<option value="${user.id}">${user.name}</option>`;
     }
 
     });
@@ -53,7 +53,7 @@ function getCard(id, title, description, userName, photo) {
 
 
 
-    return `<div class="card" data-cardId="${id}">
+    return `<div class="card" data-id="${id}">
                 <div class="card__inform">
                     <div class="card__title">${title}</div>
                     <div class="card__description">${description}</div>
@@ -67,6 +67,17 @@ function getCard(id, title, description, userName, photo) {
             </div>`;
 }
 
+document.addEventListener('change', event => {
+    if (event.target && event.target.classList.contains('card__user-select')) {
+        let cardDiv = event.target.parentElement.parentElement.parentElement;
+        let cardId = cardDiv.dataset.id;
+        GET_CARDS_RESPONSE.find(card => card.id === 1).userId = 1;
 
+
+    }
+});
+
+
+Менялся массив когда выбран другой пользователь
 
 
